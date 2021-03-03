@@ -1,2 +1,34 @@
 # Erkek.js
-Erkek kayıt yapar
+const Discord = require("discord.js");
+const moment = require("moment");
+require("moment-duration-format");
+moment.locale("tr");
+
+exports.run = async (client, message, args) => {
+  if (!message.member.hasPermission("MANAGE_NICKNAMES"))
+    return message.channel.send(` Bu Komutu Kullanabilmek için \`İsimleri Yönet\` Yetkisine Sahip Olmalısın!`);
+  let member = message.mentions.members.first();
+  let solsaminous1 = args.slice(1).join(" | ");
+  if (!member) return message.channel.send(" Bir Üye Etiketlemelisin!");
+  if (!solsaminous1) return message.channel.send(" Bir İsim Yazmalısın!");
+  member.setNickname(`${solsaminous1}`);
+  member.roles.remove('Alıncak Rol')
+  member.roles.add('Verilcek Rol')
+const embed = new Discord.MessageEmbed()
+     
+    .addField(`**Solsaminous**`, `\n**Kayıt Edilen Kullanıcı: ** ${member.user} \n**Kayıt Eden Yetkili:** \`${message.author.username}\``)
+    .addField(`**Hesap Oluşturma Tarihi:**`,`${moment(member.user.createdAt).format('dddd hh:mm:ss, DD MMMM YYYY')}`)
+client.channels.cache.get('Log kanal').send(embed)
+};
+
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  aliases: ["isim", "kayıt", "nick", "erkek", "e"],
+  permLevel: 3
+};
+exports.help = {
+  name: "erkek",
+  description: "Solsaminous",
+  usage: "erkek"
+};
