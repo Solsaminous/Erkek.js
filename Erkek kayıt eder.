@@ -6,6 +6,7 @@ moment.locale("tr");
 exports.run = async (client, message, args) => {
   if (!message.member.hasPermission("MANAGE_NICKNAMES"))
     return message.channel.send(` Bu Komutu Kullanabilmek için \`İsimleri Yönet\` Yetkisine Sahip Olmalısın!`);
+    // Solsaminous 
   let member = message.mentions.members.first();
   let solsaminous1 = args.slice(1).join(" | ");
   if (!member) return message.channel.send(" Bir Üye Etiketlemelisin!");
@@ -14,12 +15,12 @@ exports.run = async (client, message, args) => {
   member.roles.remove('Alıncak Rol')
   member.roles.add('Verilcek Rol')
 const embed = new Discord.MessageEmbed()
-     
+     // Solsaminous
     .addField(`**Solsaminous**`, `\n**Kayıt Edilen Kullanıcı: ** ${member.user} \n**Kayıt Eden Yetkili:** \`${message.author.username}\``)
     .addField(`**Hesap Oluşturma Tarihi:**`,`${moment(member.user.createdAt).format('dddd hh:mm:ss, DD MMMM YYYY')}`)
 client.channels.cache.get('Log kanal').send(embed)
 };
-
+//Solsaminous
 exports.conf = {
   enabled: true,
   guildOnly: true,
